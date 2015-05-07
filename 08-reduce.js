@@ -16,26 +16,34 @@ var prod = function(numbers) {
     return res;
 }
 
-var myReduce = function(values, combinator, initialValue) {
-    var res = initialValue || 0,
-        i;
+var myReduce = function(combinator, values, initialValue) {
+    var res, i;
 
-    for (i = 0; i < values.length; i++) {
+    if(initialValue === void 0) {
+        res = values[0];
+        i = 1;
+    } else {
+        res = initialValue;
+        i = 0;
+    }
+
+    for (; i < values.length; i++) {
         res = combinator(res, values[i]);
     }
     return res;
 }
 
-myReduce([1, 2, 3, 4], function(a, b) {
+myReduce(function(a, b) {
     return a + b;
-});
-myReduce([1, 2, 3, 4], function(a, b) {
-    return a + b;
-}, 10);
+}, [1, 2, 3, 4]);
 
-myReduce([1, 2, 3, 4], function(a, b) {
+myReduce(function(a, b) {
+    return a + b;
+}, [1, 2, 3, 4], 10);
+
+myReduce(function(a, b) {
     return a * b;
-}, 1);
+}, [1, 2, 3, 4], 1);
 
 var countNucleotides = function(strand) {
     var letters = strand.split(''),

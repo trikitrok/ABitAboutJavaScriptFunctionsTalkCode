@@ -1,4 +1,4 @@
-function(x) {
+(function(x) {
   return function(x, y) {
     return function(w, z) {
       return function(w) {
@@ -6,4 +6,4 @@ function(x) {
       }
     }
   }
-}(1000)(2, 3)(4000000000, 5)(6);
+})(1000)(2, 3)(4000000000, 5)(6);
