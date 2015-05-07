@@ -16,7 +16,7 @@ var prod = function(numbers) {
     return res;
 }
 
-var myReduce = function(combinator, values, initialValue) {
+var myReduce = function(accumulator, values, initialValue) {
     var res, i;
 
     if(initialValue === void 0) {
@@ -28,7 +28,7 @@ var myReduce = function(combinator, values, initialValue) {
     }
 
     for (; i < values.length; i++) {
-        res = combinator(res, values[i]);
+        res = accumulator(res, values[i]);
     }
     return res;
 }
