@@ -25,12 +25,12 @@ var cookAndEat = compose(eat, cook);
 
 cookAndEat("chocolate");
 
-var myReduce = function(values, combinator, initialValue) {
+var myReduce = function(values, accumulator, initialValue) {
     var res = initialValue || 0,
         i;
 
     for (i = 0; i < values.length; i++) {
-        res = combinator(res, values[i]);
+        res = accumulator(res, values[i]);
     }
     return res;
 };
