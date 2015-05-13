@@ -581,15 +581,55 @@ var composedFunction = function() {
 };
 
 /*
-  Block Scope in ES6
+  Block Scope in ES6 using let
 */
+// Pre ES6
+(function(x, y) {
+  var gamma = 3;
+  if (x > y) {
+    var gamma = 1 + y;
+    console.log(gamma * x);
+  }
+
+  console.log(gamma);
+})(2, 1);
+
+// ES6 example executed in Chrome using ScratchJs
+(function(x, y) {
+  var gamma = 3;
+  if (x > y) {
+    let gamma = 1 + y;
+    console.log(gamma * x);
+  }
+
+  console.log(gamma);
+})(2, 1);
+
+// Another ES6 let example executed in Chrome using ScratchJs
+var introductions = [],
+  names = ['Karl', 'Friedrich', 'Gauss'];
+
+for (let i = 0; i < 3; i++) {
+  introductions[i] = function(soAndSo) {
+    return "Hello, " + soAndSo + ", my name is " + names[i]
+  }
+}
 
 /*
   Using Block Scope in pre-ES6
+    You can polyfill block scope in pre-ES6
+    using Traceur.
+
+    Traceur is a traspiler of ES6 features into
+    pre-ES6 (mostly ES5, but not all!) for
+    general usage.
+
+    It's actually what ScratchJs is using
+    behind the scenes.
 */
 
 /*
-  Dynamic Scope
+  Dynamic Scope (material for another talk some day)
     * this
 
     * arguments
@@ -701,11 +741,11 @@ times(3, function() {
 /*
   Currying
 
-    Currying is an operation that transforms a function taking two or more
-    arguments into a function that takes a single argument and partially
-    applies it to the function and then curries the rest of the arguments.
+    Currying is the process of taking a function that
+    takes multiple arguments and transforming it into
+    a chain of single arguments functions.
 
-  TODO: Change this definition using the one in Living Clojure
+    See 09-currying.js and currying-builders.js
 */
 
 /*
