@@ -1,45 +1,4 @@
-// Misleading
-function foo(bar) {
-  var baz = bar * 2;
-
-  if (bar > 1) {
-    var blitz = baz - 100;
-
-    // ...
-  }
-}
-
-// Better
-function foo(bar) {
-  var baz = bar * 2,
-    blitz;
-
-  if (bar > 1) {
-    blitz = baz - 100;
-
-    // ...
-  }
-}
-
-// Problem -> hoisting!!
-var questionable = 'outer';
-
-(function() {
-  console.log(questionable);
-
-  if (true) {
-    var questionable = 'inner';
-    console.log(questionable)
-  }
-})();
-
-// ok
-var sum = 0;
-for (var i = 1; i <= 100; i++) {
-  sum = sum + i
-}
-
-// Similar example, still ok
+// Ok
 var introductions = [],
   names = ['Karl', 'Friedrich', 'Gauss'];
 
@@ -47,7 +6,7 @@ for (var i = 0; i < 3; i++) {
   introductions[i] = "Hello, my name is " + names[i]
 }
 
-// Problems, why? i is the culprit!
+// Problems, why? -> i is the culprit!
 var introductions = [],
   names = ['Karl', 'Friedrich', 'Gauss'];
 
@@ -57,7 +16,10 @@ for (var i = 0; i < 3; i++) {
   }
 }
 
-// Fixed with a let
+introductions[0]("koko"); // => 'Hello, koko, my name is undefined'
+i // => 3
+
+// Fixed with a "let"
 var introductions = [],
   names = ['Karl', 'Friedrich', 'Gauss'];
 
@@ -68,6 +30,8 @@ for (var i = 0; i < 3; i++) {
     }
   })(i)
 }
+
+introductions[0]("koko"); // => 'Hello, koko, my name is Karl'
 
 // Fixed with a variable
 var introductions = [],
@@ -82,18 +46,4 @@ for (var i = 0; i < 3; i++) {
   })()
 }
 
-var counter = (function() {
-  var value = 0;
-  return function() {
-    return value++
-  }
-})();
-
-var modulo = (function() {
-  //private state  
-  //private functions  
-  return {
-    //public state    
-    //public variables  
-  }
-})();
+introductions[0]("koko"); // => 'Hello, koko, my name is Karl'

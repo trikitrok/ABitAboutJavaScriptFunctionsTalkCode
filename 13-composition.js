@@ -25,16 +25,6 @@ var cookAndEat = compose(eat, cook);
 
 cookAndEat("chocolate");
 
-var myReduce = function(values, accumulator, initialValue) {
-    var res = initialValue || 0,
-        i;
-
-    for (i = 0; i < values.length; i++) {
-        res = accumulator(res, values[i]);
-    }
-    return res;
-};
-
 var dreamWith = function(food) {
   console.log("Dream with " + food + "!");
   return food;
@@ -44,6 +34,6 @@ var identity = function(x) {
   return x;
 };
 
-var fn = myReduce([eat, cook, dreamWith], compose, identity);
+var fn = [eat, cook, dreamWith].reduce(compose, identity);
 
 fn("Cookies");

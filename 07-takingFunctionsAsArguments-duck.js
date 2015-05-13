@@ -20,3 +20,14 @@ quack(muteQuacking);
 quack(function() {
   console.log("Quack!Quack!Quack!Quack!Quack!Quack!");
 });
+
+var times = function(n, fn) {
+  var i;
+  for (i = 0; i < n; i++) {
+    fn();
+  }
+};
+
+quack(function insistentQuacking() {
+  times(10, justQuacking);
+});

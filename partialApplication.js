@@ -1,4 +1,4 @@
-var partiallyAppliedReduce = function(combinator) {
+var partiallyAppliedReduce = function(accumulator) {
     return function(values, initialValue) {
         var res, i;
 
@@ -11,7 +11,7 @@ var partiallyAppliedReduce = function(combinator) {
         }
 
         for (; i < values.length; i++) {
-            res = combinator(res, values[i]);
+            res = accumulator(res, values[i]);
         }
         return res;
     }
@@ -25,7 +25,7 @@ sum(0, [1, 2, 3, 4]);
 
 var _und = require('./node_modules/underscore-node/lib/underscore.js');
 
-var myReduce = function(combinator, values, initialValue) {
+var myReduce = function(accumulator, values, initialValue) {
     var res, i;
 
     if(initialValue === void 0) {
@@ -37,7 +37,7 @@ var myReduce = function(combinator, values, initialValue) {
     }
 
     for (; i < values.length; i++) {
-        res = combinator(res, values[i]);
+        res = accumulator(res, values[i]);
     }
     return res;
 }
