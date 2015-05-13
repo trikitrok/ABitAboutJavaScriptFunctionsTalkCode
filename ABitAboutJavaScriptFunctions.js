@@ -4,7 +4,7 @@
 
 /*
   We'll talk about a subset of JavaScript's functions semantics
-  and some idioms based on them.
+  and some idioms based on it.
 
   This talk focuses in introducing the following concepts:
   functions as first class entities, closures and higher-order functions.
@@ -32,7 +32,7 @@
 */
 
 /*
-  Parts of a function literal:
+  Parts of a function:
 
     1. The reserved word function.
 
@@ -62,9 +62,8 @@
 /*
   Functions are objects.
 
-    They have properties and methods: length, arguments, prototype, apply, call,...
-
-    We'll come back to this later.
+    They have properties and methods:
+      such as, length, arguments, prototype, apply, call,...
 */
 
 /*
@@ -78,7 +77,7 @@
 /*
   Applying a function
 
-  * We use functions applying them to zero or more values called arguments.
+  We use functions applying them to zero or more values called arguments.
 
   * If fn_expr is an expression that when evaluated produces a function
   and if args are the arguments.
@@ -121,7 +120,7 @@
 /*
   Call by sharing
 
-    For reference types, JS places a reference to the reference type in the environment.
+    For reference types -> JS places a reference to the reference type in the environment.
 
     When the value needs to be used, JS uses the reference in the environment
     to retrieve the original.
@@ -232,9 +231,7 @@
   Free variables
     A free variable is one that is not bound
     within the function.
-*/
 
-/*
   x was a free variable of the inner function
   in the previous example.
 
@@ -267,19 +264,9 @@
   * Also known as scope chain.
 
   * The last stop in the scope chain is the global environment.
-*/
-var h = 5;
 
-(function(x) {
-  // env -> {x: 2, '..': {h: 5}}
-  return function(y) {
-    // env -> {y: 3, '..': {x: 2, '..': {h: 5}}}
-    return function(z) {
-      // env -> {z: 4, '..': {y: 3, '..': {x: 2, '..': {h: 5}}}}
-      return x + y + z + h;
-    }
-  }
-})(2)(3)(4);
+ See example in environmentChain.js
+*/
 
 /*
   Types of lookup in the scope chain.
@@ -312,17 +299,10 @@ var h = 5;
 
     * If done on purpose, it's often a good thing.
 
-    * If not, you're programming by accident and that can be dangerous.
+    * If not, you're programming by accident and that can always gets dangerous.
+
+  See example in 02-shadowing.js
 */
-(function(x) {
-  return function(x, y) {
-    return function(w, z) {
-      return function(w) {
-        return x + y + z + w;
-      }
-    }
-  }
-})(1000)(2, 3)(4000000000, 5)(6);
 
 // What's the value returned by the function?
 
@@ -332,69 +312,26 @@ var h = 5;
 
 /*
   Hoisting
+
+  See example in hoisting.js
 */
-var x = 'outer';
-
-(function() {
-  console.log(x);
-
-  if (true) {
-    var x = 'inner';
-    console.log(x)
-  }
-})();
 
 // What gets printed on the console?
 
 /*
-  Code Patterns using var
+  Code Pattern using var
+
+    Declare all your variables at the beginning
+    of the function using var, to make your code
+    easier to understand
+
+    See example in codePatternUsingVar.js
 */
-
-// This version of the code is
-// more similar to what was really being executed
-// in the previous example and makes it easier
-// to get to the right answer
-
-(function() {
-  var x;
-
-  console.log(x);
-
-  if (true) {
-    x = 'inner';
-    console.log(x)
-  }
-})();
-
-// So avoid misleading code like this
-function foo(bar) {
-  var baz = bar * 2;
-
-  if (bar > 1) {
-    var blitz = baz - 100;
-
-    // ...
-  }
-}
-
-// Better declare all your variables at
-// the beginning of the function, to make
-// your code easier to understand
-function foo(bar) {
-  var baz = bar * 2,
-    blitz;
-
-  if (bar > 1) {
-    blitz = baz - 100;
-
-    // ...
-  }
-}
 
 /*
   Reassignment, mutation, aliasing
 
-  * JavaScript allows you to re-assign the value of variables.
+  * JS allows you to re-assign the value of variables.
 
   * Actually what we are doing is rebinding a different value to the same name
    in the same environment.
@@ -402,21 +339,20 @@ function foo(bar) {
   * Reference type values can mutate.
   Their identities stay the same, but not their structure/contents.
 
-  * JavaScript’s semantics allow for two different bindings to refer to the same value,
+  * JS’s semantics allow for two different bindings to refer to the same value,
   they are aliases for the same value.
 
-  * See examples in:
-    03-ReassignmentAndMutation.js
-    04-ReassignmentAndMutation.js
+  See examples in 03-ReassignmentAndMutation.js and 04-ReassignmentAndMutation.js
 */
 
 /*
   Closures
-    We've been seen then for a while.
+
+  We've been seing then for a while*.
 
   They are just functions with free variables.
 
-  See Nested Functions above.
+  * See Nested Functions slide.
 */
 
 /*
@@ -425,27 +361,16 @@ function foo(bar) {
       Function
         +
       Environment where the function was defined
+
+  See example in closures.js
 */
-(function(x) {
-  // env -> {x: 3, '..': {}}
-  return function(y) {
-    // env ->{y: 4, '..': {x: 3, '..': {}}}
-    return x * y;
-  }
-})(3)(4);
 
 /*
   Some idioms using closures:
     Private state
+
+    See example in 12.privateState.js
 */
-var counter = (function() {
-  var value = 0;
-  // env -> {value: 0, '..': {}}
-  return function() {
-    // env -> {'..': {value: 0, '..': {}}}
-    return value++
-  }
-})();
 
 /*
   Some idioms using closures:
@@ -459,64 +384,9 @@ var counter = (function() {
         //public functions
       };
     }
+
+  See example in modulePatternExample.js
 */
-
-var LocaleFunctions = (function(locale, preferredLanguages) {
-  var localeData = {
-      'es': {
-        patternForFloats: "^\\d+(,\\d+)?$",
-        decimalSeparator: ',',
-        decimalSeparatorToBeReplaced: '.'
-      },
-
-      'en': {
-        patternForFloats: "^\\d+([.]\\d+)?$",
-        decimalSeparator: '.',
-        decimalSeparatorToBeReplaced: ','
-      }
-    },
-    getLocaleProperty = function(propertyName) {
-      return localeData[locale.getLocale()][propertyName];
-    },
-    replaceDecimalSeparator: function(str) {
-      return str.replace(
-        getLocaleProperty("decimalSeparatorToBeReplaced"),
-        getLocaleProperty("decimalSeparator")
-      );
-    },
-    isFloatValid: function(value) {
-      var pattern = getLocaleProperty("patternForFloats"),
-        reg = new RegExp(pattern);
-
-      if (_.isUndefined(value)) {
-        return false;
-      }
-
-      return reg.test(value);
-    };
-
-  return {
-    isFloatValid: isFloatValid,
-
-    localeFloatString: function(value) {
-      if (!_.isString(value)) {
-        return value;
-      }
-      return replaceDecimalSeparator(value);
-    },
-
-    getLocale: function() {
-      return locale.getLocale();
-    },
-
-    changeLocale: function(userLang) {
-      if (userLang !== this.getLocale() &&
-        preferredLanguages.isSupportedLanguage(userLang)) {
-        locale.setLocale(userLang);
-      }
-    }
-  };
-})(locale, preferredLanguages);
 
 /*
   Named functions
@@ -565,20 +435,9 @@ var bindingNameForIsEvenFn = function isEvenFnActualName(n) {
     It facilitates a certain style of programming where
     you can put the main logic at the top,
     and the helper functions at the bottom:
+
+  See example in composedFunctions.js
 */
-
-var composedFunction = function() {
-  doSomething();
-  doSometringElse();
-
-  function doSomething() {
-    console.log("something is done");
-  };
-
-  function doSometringElse() {
-    console.log("something else is done");
-  };
-};
 
 /*
   Block Scope in ES6 using let
@@ -784,6 +643,8 @@ function not(fn) {
     Prototype chain
     Functions as constructors
     Functions apply and call methods
+
+  In another talk some day.
 */
 
 /*

@@ -1,16 +1,7 @@
-// A closure
-var counter = (function() {
-  var value = 0;
-  return function() {
-    return value++
+(function(x) {
+  // env -> {x: 3, '..': {}}
+  return function(y) {
+    // env ->{y: 4, '..': {x: 3, '..': {}}}
+    return x * y;
   }
-})();
-
-var modulo = (function() {
-  //private state
-  //private functions
-  return {
-    //public state
-    //public variables
-  }
-})();
+})(3)(4);
