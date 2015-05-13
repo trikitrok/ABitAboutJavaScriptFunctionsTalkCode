@@ -397,18 +397,23 @@ bindingName.name
 
 /*
   Benefits of using named functions
-    * Debugging.
+    * Debugging is easie.
+      It gets easier because the names of the functions
+      are displayed in stack traces.
+
     * Recursion.
+      A named function can refer to itself without having to use
+      the deprecated arguments.calle reference.
 */
 
 /*
   Recursion
 */
-var bindingNameForIsEvenFn = function isEvenFnActualName(n) {
+var fn = function even(n) {
   if (n === 0) {
     return true;
   } else {
-    return !bindingNameForIsEvenFn(n - 1);
+    return !even(n - 1);
   }
 }
 
@@ -420,7 +425,7 @@ var bindingNameForIsEvenFn = function isEvenFnActualName(n) {
     function name () {
     }
 
-  It's like doing:
+  It's more or less like doing:
 
     var name = function name () {
     };
@@ -436,7 +441,7 @@ var bindingNameForIsEvenFn = function isEvenFnActualName(n) {
     you can put the main logic at the top,
     and the helper functions at the bottom:
 
-  See example in composedFunctions.js
+  See an example in composedFunctions.js
 */
 
 /*
@@ -475,11 +480,11 @@ for (let i = 0; i < 3; i++) {
 }
 
 /*
-  Using Block Scope in pre-ES6
+  Block Scope polyfill for pre-ES6
     You can polyfill block scope in pre-ES6
     using Traceur.
 
-    Traceur is a traspiler of ES6 features into
+    Traceur is a transpiler of ES6 features into
     pre-ES6 (mostly ES5, but not all!) for
     general usage.
 
@@ -506,7 +511,7 @@ for (let i = 0; i < 3; i++) {
   * Everything follows lexical scope semantics except this and arguments
     which follow dynamic scope.
 
-  * There is a scope chain.
+  * There is a scope chain (environment chain).
 */
 
 /*
@@ -546,7 +551,7 @@ times(3, function() {
 */
 
 /*
-  The importance about pattens...
+  The importance about patterns...
   TODO -> get quote from Js Allongé
 */
 
@@ -563,12 +568,14 @@ times(3, function() {
 */
 
 /*
-  Applicative programming most known examples:
+  Applicative programming
+
+  Most known examples:
     map, filter, reduce
 
   But there are many more.
 
-  Take a look at underscore or lodash libraries.
+  Take a look, for instance, at underscore library (http://underscorejs.org/).
 */
 
 /*
@@ -576,16 +583,17 @@ times(3, function() {
 */
 
 /*
-  3 basic strategies
+  Basic strategies
     * Compose
     * Partial application
     * Currying
+    * Home-made
 */
 
 /*
   Composition
 
-  See 13-composition.js
+  See example in 13-composition.js
 */
 
 /*
@@ -594,15 +602,15 @@ times(3, function() {
     It refers to the process of fixing a number of arguments of a function,
     producing another function with a smaller number of arguments.
 
-    See partialApplication.js
+  See partialApplication.js
 */
 
 /*
   Currying
 
-    Currying is the process of taking a function that
+    The process of taking a function that
     takes multiple arguments and transforming it into
-    a chain of single arguments functions.
+    a chain of single argument functions.
 
     See 09-currying.js and currying-builders.js
 */
@@ -644,9 +652,13 @@ function not(fn) {
     Functions as constructors
     Functions apply and call methods
 
-  In another talk some day.
+  May be in another talk some day.
 */
 
 /*
-  Thanks for listening!
+  Thanks!
+
+    @trikitrok
+
+    http://garajeando.blogspot.com.es/
 */
