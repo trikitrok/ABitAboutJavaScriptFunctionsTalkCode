@@ -348,7 +348,7 @@
 /*
   Closures
 
-  We've been seing then for a while*.
+  We've been seeing them for a while*.
 
   They are just functions with free variables.
 
