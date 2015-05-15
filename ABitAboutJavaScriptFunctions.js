@@ -417,8 +417,6 @@ var fn = function even(n) {
   }
 }
 
-// TODO -> See example Js Allongé
-
 /*
   Function Declaration (I)
 
@@ -551,8 +549,12 @@ times(3, function() {
 */
 
 /*
-  The importance about patterns...
-  TODO -> get quote from Js Allongé
+  "Like many patterns, using it when it applies is only 20% of the benefit.
+
+  The other 80% comes from organizing your code
+  such that you can use it:
+
+  Writing functions that can be composed in various ways"
 */
 
 /*
@@ -639,7 +641,7 @@ function not(fn) {
   which adapts the function passed as an argument to a
   different signature.
 
-  TODO: add example with parseInt and forEach
+  See example in adapter.js
 */
 
 /*
