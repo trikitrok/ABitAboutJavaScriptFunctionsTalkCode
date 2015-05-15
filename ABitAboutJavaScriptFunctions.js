@@ -301,13 +301,13 @@
 
     * If not, you're programming by accident and that can always gets dangerous.
 
-  See example in 02-shadowing.js
+  See example in shadowing.js
 */
 
 // What's the value returned by the function?
 
 /*
-  See example in 01-FunctionScope.js
+  See example in functionScope.js
 */
 
 /*
@@ -342,7 +342,7 @@
   * JS’s semantics allow for two different bindings to refer to the same value,
   they are aliases for the same value.
 
-  See examples in 03-ReassignmentAndMutation.js and 04-ReassignmentAndMutation.js
+  See examples in reassignmentAndMutation_1.js and reassignmentAndMutation_2.js
 */
 
 /*
@@ -369,7 +369,7 @@
   Some idioms using closures:
     Private state
 
-    See example in 12.privateState.js
+    See example in privateState.js
 */
 
 /*
@@ -544,8 +544,8 @@ times(3, function() {
 
   Strategy pattern example
     See http://garajeando.blogspot.com.es/2014/01/strategy-pattern-and-higher-order.html
-    See wrong_strategy.js
-    See 07-takingFunctionsAsArguments-duck.js
+    See verbose_strategy.js
+    See takingFunctionsAsArguments-duck.js
 */
 
 /*
@@ -595,7 +595,7 @@ times(3, function() {
 /*
   Composition
 
-  See example in 13-composition.js
+  See example in composition.js
 */
 
 /*
