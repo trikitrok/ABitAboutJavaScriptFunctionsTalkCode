@@ -8,12 +8,14 @@ var allHallowsEve = [2012, 10, 31];
   // ...
 })(allHallowsEve);
 
-
 // Rebinding halloween to a different value
 var allHallowsEve = [2012, 10, 31];
 (function(halloween) {
   halloween = [2013, 10, 31];
+  halloween[0] = 10;
 })(allHallowsEve);
+
+console.log(allHallowsEve);
 
 // Mutating halloween value
 var allHallowsEve = [2012, 10, 31];
