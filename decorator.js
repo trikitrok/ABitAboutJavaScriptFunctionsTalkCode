@@ -1,8 +1,13 @@
-function not(fn) {
-  return function(argument) {
-    return !fn(argument)
-  }
+function complement(fn) {
+  return function() {
+    return !fn.apply(this, arguments);
+  };
 }
+
+var equal = function(a,b) {return a===b;};
+
+var notEqual = complement(equal);
+
 
 function maybe(fn) {
   return function() {

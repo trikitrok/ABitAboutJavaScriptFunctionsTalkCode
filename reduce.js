@@ -19,18 +19,22 @@ var prod = function(numbers) {
 var myReduce = function(accumulator, values, initialValue) {
     var res, i;
 
-    if(initialValue === void 0) {
-        res = values[0];
-        i = 1;
-    } else {
-        res = initialValue;
-        i = 0;
-    }
+    initLoopState();
 
     for (; i < values.length; i++) {
         res = accumulator(res, values[i]);
     }
     return res;
+
+    function initLoopState() {
+        if (initialValue === void 0) {
+            res = values[0];
+            i = 1;
+        } else {
+            res = initialValue;
+            i = 0;
+        }
+    }
 }
 
 myReduce(function(a, b) {
@@ -46,21 +50,21 @@ myReduce(function(a, b) {
 }, [1, 2, 3, 4], 1);
 
 var countNucleotides = function(strand) {
-    var letters = strand.split(''),
-        countedNucleotides = {
+    var nucleotides = strand.split(''),
+        frequenciesByNucleotides = {
             "A": 0,
             "T": 0,
             "C": 0,
             "G": 0
         };
 
-    letters.reduce(function(count, letter) {
-            count[letter]++;
-            return count;
+    nucleotides.reduce(function(frequencies, nucleotide) {
+            frequencies[nucleotide] += 1;
+            return frequencies;
         },
-        countedNucleotides);
+        frequenciesByNucleotides);
 
-    return countedNucleotides;
+    return frequenciesByNucleotides;
 };
 
 countNucleotides("GATTACA")
