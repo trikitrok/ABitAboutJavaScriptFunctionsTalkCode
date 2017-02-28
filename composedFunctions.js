@@ -6,7 +6,7 @@ var composedFunction = function() {
     console.log("something is done");
   };
 
-  function doSometringElse() {
+  function doSomethingElse() {
     console.log("something else is done");
   };
 };
